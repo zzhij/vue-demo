@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>1212121</div>
+    <div>{{person.name}} --- {{person.age}}</div>
+    <input v-model="person.name" />
+  </div>
+  <script src="./index.js"></script>
+  <script>
+    var vm = new MVue({
+      el: document.getElementById('app'),
+      data: {
+        person: {
+          name: '测试名字',
+          age: 18
+        }
+      }
+    })
+  </script>
+</body>
+</html>
