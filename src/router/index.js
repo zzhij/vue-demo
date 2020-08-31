@@ -46,6 +46,12 @@ const routes = [
         showName: 'circulation',
         name: 'circulation',
         component: () => import('../packages/animation/picture-bg.vue')
+      },
+      {
+        path: '/animation/showOrHide',
+        showName: 'showOrHide',
+        name: 'showOrHide',
+        component: () => import('../packages/animation/showOrHide.vue')
       }
     ]
   }

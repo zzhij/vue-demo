@@ -1,9 +1,9 @@
-export function uniqObjInArray(arr) {
-  let object = {};
-  let objres = arr.reduce((item,next) => { // item累加  next 当前值
-    console.log("item is ",item);
-    object[next.key] ? "" : object[next.key] = true && item.push(next);
-    return item;
+export function uniqObjInArray (arr) {
+  const object = {}
+  const objres = arr.reduce((item, next) => { // item累加  next 当前值
+    console.log('item is ', item)
+    object[next.key] ? '' : object[next.key] = true && item.push(next)
+    return item
   }, [])
   return objres
 /* ————————————————
