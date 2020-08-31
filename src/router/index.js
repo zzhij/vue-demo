@@ -54,6 +54,23 @@ const routes = [
         component: () => import('../packages/animation/showOrHide.vue')
       }
     ]
+  },
+  {
+    path: '/elementui',
+    name: 'elementui',
+    showName: 'elementui',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import('../packages/animation/index.vue'),
+    children: [
+      {
+        path: '/elementui/scrollbar',
+        name: 'scrollbar',
+        showName: 'scrollbar',
+        component: () => import('../packages/elementui/scrollbar/index.vue')
+      }
+    ]
   }
 ]
 
