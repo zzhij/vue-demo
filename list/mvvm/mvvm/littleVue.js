@@ -18,7 +18,7 @@ class Watcher {
     Dep.target = null;
     return oldVal;
   }
-  // 通过回调函数更新数据
+  // 通过回调函数更新据数
   update() {
     const newVal = compileUtil.getValue(this.expr, this.vm);
     if (newVal !== this.oldVal) {

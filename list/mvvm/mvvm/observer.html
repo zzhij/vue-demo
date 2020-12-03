@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简单的发布订阅</title>
+</head>
+<body>
+  <div>
+    数据一: <span class="dom1">1212</span>
+    数据二: <span class="dom2">3434</span>
+  </div>
+  <script>
+    // 订阅模型
+    let Dep = {
+      // 存储对象
+      clientList: {},
+      listen: function(key, fn) {
+        if(!this.clientList[key]) {
+          this.clientList[key] = [];
+        }
+        this.clientList[key].push(fn);
+        // (this.clientList[key] || (this.clientList[key] = [])).push(fn);
+      },
+      trigger: function() {
+        // 类数组 => 数组
+        let key = Array.prototype.shift.call(arguments),
+          fns = this.clientList[key];
+          if(!fns || fns.length === 0) {
+            return false;
+          }
+          for(let i = 0, fn; fn = fns[i]; i++) {
+            fn.apply(this, arguments);
+          }
+
+          // for(let i = 0, fn; fn = fns[i++]) {
+          //   fn.apply(this, arguments);
+          // }
+      }
+    }
+    let Observer = function({data, tag, dataKey, selector}) {
+      let value = '',
+        el = document.querySelector(selector);
+      Object.defineProperty(data, dataKey, {
+        get: function () {
+          console.log('获取值');
+          return value;
+        },
+        set: function(newVal) {
+          console.log('设置值');
+          value = newVal;
+          // 发布消息
+          Dep.trigger(tag, newVal);
+        }
+      });
+      // 订阅数据 模板
+      Dep.listen(tag, function(text) {
+        el.innerHTML = text
+      })
+    }
+  </script>
+  <script>
+    let obj = {};
+    Observer({
+      data: obj,
+      dataKey: 'a',
+      tag: 'one',
+      selector: '.dom1'
+    })
+    obj.a = 'dom1数据更新了';
+  </script>
+</body>
+</html>
